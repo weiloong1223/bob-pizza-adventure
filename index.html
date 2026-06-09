@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍕 Bob's Pizza Adventure - AI-Powered SDLC Showcase</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="bob-avatar">
+                <div class="robot-head">
+                    <div class="robot-eyes">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                    </div>
+                    <div class="robot-antenna"></div>
+                </div>
+            </div>
+            <h1 class="title">🍕 Bob's Pizza Adventure</h1>
+            <p class="subtitle">Watch me build a pizza ordering app using AI through the entire SDLC!</p>
+            <div class="speech-bubble">
+                <p>"Hi! I'm Bob, and I'm hungry for pizza! 🤖"</p>
+                <p>"Let me show you how I built an entire app using AI assistance..."</p>
+            </div>
+            <button class="cta-button" onclick="startAdventure()">
+                🚀 START THE ADVENTURE
+            </button>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="progress-section" id="progressSection" style="display: none;">
+        <div class="container">
+            <h2>🎮 Your Progress</h2>
+            <div class="progress-tracker">
+                <div class="phase-item" id="phase-planning" data-phase="planning">
+                    <div class="phase-icon">🎯</div>
+                    <div class="phase-name">Planning</div>
+                    <div class="phase-status">⏸️</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="phase-item" id="phase-design" data-phase="design">
+                    <div class="phase-icon">🎨</div>
+                    <div class="phase-name">Design</div>
+                    <div class="phase-status">⏸️</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="phase-item" id="phase-coding" data-phase="coding">
+                    <div class="phase-icon">💻</div>
+                    <div class="phase-name">Coding</div>
+                    <div class="phase-status">⏸️</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="phase-item" id="phase-testing" data-phase="testing">
+                    <div class="phase-icon">🧪</div>
+                    <div class="phase-name">Testing</div>
+                    <div class="phase-status">⏸️</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="phase-item" id="phase-deployment" data-phase="deployment">
+                    <div class="phase-icon">🚀</div>
+                    <div class="phase-name">Deploy</div>
+                    <div class="phase-status">⏸️</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content-section" id="contentSection" style="display: none;">
+        <div class="container">
+            <!-- Phase content will be loaded here dynamically -->
+            <div id="phaseContent"></div>
+            
+            <!-- Navigation Buttons -->
+            <div class="navigation-buttons">
+                <button class="nav-button prev" id="prevButton" onclick="previousPhase()" style="display: none;">
+                    ⬅️ Previous
+                </button>
+                <button class="nav-button next" id="nextButton" onclick="nextPhase()">
+                    Next ➡️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Metrics Dashboard -->
+    <div class="metrics-section" id="metricsSection" style="display: none;">
+        <div class="container">
+            <h2>📊 Bob's Impact Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">⏱️</div>
+                    <div class="metric-value" id="timeSaved">0</div>
+                    <div class="metric-label">Hours Saved</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">📝</div>
+                    <div class="metric-value" id="linesOfCode">0</div>
+                    <div class="metric-label">Lines of Code</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">🐛</div>
+                    <div class="metric-value" id="bugsPrevented">0</div>
+                    <div class="metric-label">Bugs Prevented</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">✅</div>
+                    <div class="metric-value" id="testsWritten">0</div>
+                    <div class="metric-label">Tests Written</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final CTA -->
+    <div class="final-section" id="finalSection" style="display: none;">
+        <div class="container">
+            <h2>🎉 Congratulations!</h2>
+            <p class="final-message">You've witnessed Bob build an entire pizza ordering app through the SDLC!</p>
+            <div class="final-buttons">
+                <button class="cta-button" onclick="window.location.href='pizza-app.html'">
+                    🍕 TRY THE PIZZA APP
+                </button>
+                <button class="cta-button secondary" onclick="restartAdventure()">
+                    🔄 START OVER
+                </button>
+            </div>
+            <div class="share-section">
+                <p>Share this adventure:</p>
+                <div class="share-buttons">
+                    <button class="share-button linkedin" onclick="shareOnLinkedIn()">
+                        Share on LinkedIn
+                    </button>
+                    <button class="share-button twitter" onclick="shareOnTwitter()">
+                        Share on Twitter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Built with ❤️ by Bob (AI Assistant) | Showcasing IBM Bob's SDLC Capabilities</p>
+            <p>
+                <a href="https://github.com/yourusername/bob-pizza-adventure" target="_blank">
+                    View on GitHub
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/phases.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

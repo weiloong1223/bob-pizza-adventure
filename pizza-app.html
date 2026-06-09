@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍕 Pizza Paradise - Order Now!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: #fff;
+            padding: 40px 20px;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .pizza-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .pizza-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .pizza-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pizza-icon {
+            font-size: 5rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .pizza-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .pizza-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .pizza-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .toppings {
+            margin: 20px 0;
+        }
+        
+        .toppings h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .topping-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+        
+        .topping-item input {
+            margin-right: 10px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(245, 87, 108, 0.4);
+        }
+        
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        .cart-content {
+            padding: 20px;
+        }
+        
+        .cart-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .cart-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .cart-item-name {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .cart-item-price {
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .cart-item-toppings {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .remove-item {
+            background: #f44336;
+            color: #fff;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .cart-total {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .cart-total h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .total-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .checkout-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .checkout-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        .cart-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .cart-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #f44336;
+            color: #fff;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+        
+        .empty-cart-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .pizza-menu {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        
+        .modal h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .modal p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .modal-button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">⬅️ Back to Adventure</a>
+        
+        <header>
+            <h1>🍕 Pizza Paradise</h1>
+            <p>Built by Bob - Your AI Coding Assistant</p>
+        </header>
+        
+        <div class="pizza-menu" id="pizzaMenu">
+            <!-- Pizza cards will be generated here -->
+        </div>
+    </div>
+    
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>🛒 Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-content" id="cartContent">
+            <!-- Cart items will be displayed here -->
+        </div>
+    </div>
+    
+    <!-- Floating Cart Button -->
+    <button class="cart-button" onclick="toggleCart()">
+        🛒
+        <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    
+    <!-- Order Confirmation Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-icon">🎉</div>
+            <h2>Order Placed Successfully!</h2>
+            <p>Your delicious pizzas are on their way!</p>
+            <p><strong>Order Number:</strong> <span id="orderNumber"></span></p>
+            <p><strong>Total:</strong> $<span id="orderTotal"></span></p>
+            <button class="modal-button" onclick="closeModal()">Awesome!</button>
+            <button class="modal-button" onclick="shareOrder()">Share on LinkedIn</button>
+        </div>
+    </div>
+    
+    <script>
+        // Pizza data
+        const pizzas = [
+            {
+                id: 1,
+                name: 'Margherita Classic',
+                description: 'Fresh mozzarella, tomato sauce, and basil',
+                price: 12.99,
+                icon: '🍕',
+                toppings: ['Extra Cheese', 'Olives', 'Mushrooms', 'Bell Peppers']
+            },
+            {
+                id: 2,
+                name: 'Pepperoni Deluxe',
+                description: 'Loaded with pepperoni and mozzarella',
+                price: 14.99,
+                icon: '🍕',
+                toppings: ['Extra Pepperoni', 'Jalapeños', 'Onions', 'Extra Cheese']
+            },
+            {
+                id: 3,
+                name: 'Veggie Supreme',
+                description: 'Fresh vegetables and herbs',
+                price: 13.99,
+                icon: '🥗',
+                toppings: ['Spinach', 'Tomatoes', 'Artichokes', 'Feta Cheese']
+            },
+            {
+                id: 4,
+                name: 'BBQ Chicken',
+                description: 'Grilled chicken with BBQ sauce',
+                price: 15.99,
+                icon: '🍗',
+                toppings: ['Extra Chicken', 'Red Onions', 'Cilantro', 'Ranch Drizzle']
+            },
+            {
+                id: 5,
+                name: 'Hawaiian Paradise',
+                description: 'Ham, pineapple, and mozzarella',
+                price: 14.49,
+                icon: '🍍',
+                toppings: ['Extra Pineapple', 'Bacon', 'Extra Ham', 'BBQ Sauce']
+            },
+            {
+                id: 6,
+                name: 'Meat Lovers',
+                description: 'Pepperoni, sausage, bacon, and ham',
+                price: 16.99,
+                icon: '🥓',
+                toppings: ['Extra Meat', 'Jalapeños', 'Onions', 'Extra Cheese']
+            }
+        ];
+        
+        let cart = [];
+        
+        // Render pizza menu
+        function renderPizzaMenu() {
+            const menuContainer = document.getElementById('pizzaMenu');
+            menuContainer.innerHTML = pizzas.map(pizza => `
+                <div class="pizza-card">
+                    <div class="pizza-icon">${pizza.icon}</div>
+                    <div class="pizza-name">${pizza.name}</div>
+                    <div class="pizza-description">${pizza.description}</div>
+                    <div class="pizza-price">$${pizza.price.toFixed(2)}</div>
+                    <div class="toppings">
+                        <h4>Add Extra Toppings ($1.50 each):</h4>
+                        ${pizza.toppings.map((topping, index) => `
+                            <div class="topping-item">
+                                <input type="checkbox" id="topping-${pizza.id}-${index}" value="${topping}">
+                                <label for="topping-${pizza.id}-${index}">${topping}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart(${pizza.id})">
+                        Add to Cart 🛒
+                    </button>
+                </div>
+            `).join('');
+        }
+        
+        // Add to cart
+        function addToCart(pizzaId) {
+            const pizza = pizzas.find(p => p.id === pizzaId);
+            const selectedToppings = [];
+            
+            pizza.toppings.forEach((topping, index) => {
+                const checkbox = document.getElementById(`topping-${pizzaId}-${index}`);
+                if (checkbox && checkbox.checked) {
+                    selectedToppings.push(topping);
+                    checkbox.checked = false;
+                }
+            });
+            
+            const cartItem = {
+                ...pizza,
+                toppings: selectedToppings,
+                totalPrice: pizza.price + (selectedToppings.length * 1.50)
+            };
+            
+            cart.push(cartItem);
+            updateCart();
+            showToast('Added to cart! 🎉');
+        }
+        
+        // Update cart display
+        function updateCart() {
+            const cartContent = document.getElementById('cartContent');
+            const cartBadge = document.getElementById('cartBadge');
+            
+            cartBadge.textContent = cart.length;
+            
+            if (cart.length === 0) {
+                cartContent.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <p>Your cart is empty</p>
+                        <p>Add some delicious pizzas!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+            
+            cartContent.innerHTML = `
+                ${cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div class="cart-item-header">
+                            <span class="cart-item-name">${item.icon} ${item.name}</span>
+                            <span class="cart-item-price">$${item.totalPrice.toFixed(2)}</span>
+                        </div>
+                        ${item.toppings.length > 0 ? `
+                            <div class="cart-item-toppings">
+                                + ${item.toppings.join(', ')}
+                            </div>
+                        ` : ''}
+                        <button class="remove-item" onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `).join('')}
+                <div class="cart-total">
+                    <h3>Total</h3>
+                    <div class="total-amount">$${total.toFixed(2)}</div>
+                    <button class="checkout-button" onclick="checkout()">
+                        Checkout 🎉
+                    </button>
+                </div>
+            `;
+        }
+        
+        // Remove from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+            showToast('Item removed');
+        }
+        
+        // Toggle cart sidebar
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            cartSidebar.classList.toggle('open');
+        }
+        
+        // Checkout
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+            const orderNumber = 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            
+            document.getElementById('orderNumber').textContent = orderNumber;
+            document.getElementById('orderTotal').textContent = total.toFixed(2);
+            document.getElementById('orderModal').classList.add('show');
+            
+            // Clear cart
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('orderModal').classList.remove('show');
+        }
+        
+        // Share order
+        function shareOrder() {
+            const text = "I just ordered pizza from an app built by Bob (AI)! 🍕🤖 Check out this amazing AI-powered SDLC showcase!";
+            const url = window.location.href.replace('pizza-app.html', 'index.html');
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&summary=${encodeURIComponent(text)}`, '_blank');
+            closeModal();
+        }
+        
+        // Toast notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 100px;
+                right: 30px;
+                background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+                color: #fff;
+                padding: 15px 25px;
+                border-radius: 50px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+                z-index: 10000;
+                animation: slideIn 0.3s ease-out;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => toast.remove(), 300);
+            }, 2000);
+        }
+        
+        // Add animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(400px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Initialize
+        renderPizzaMenu();
+        updateCart();
+        
+        console.log('🍕 Pizza app loaded! Built by Bob!');
+    </script>
+</body>
+</html>
