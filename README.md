@@ -29,14 +29,14 @@ Try the actual pizza ordering app that Bob built!
 
 ### Windows
 ```batch
-git clone https://github.com/yourusername/bob-pizza-adventure.git
+git clone https://github.com/weiloong1223/bob-pizza-adventure.git
 cd bob-pizza-adventure
 setup.bat
 ```
 
 ### Mac/Linux
 ```bash
-git clone https://github.com/yourusername/bob-pizza-adventure.git
+git clone https://github.com/weiloong1223/bob-pizza-adventure.git
 cd bob-pizza-adventure
 chmod +x setup.sh
 ./setup.sh
