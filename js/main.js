@@ -425,6 +425,13 @@ function updateMetrics() {
 // Animate metric values
 function animateValue(id, start, end, duration) {
     const element = document.getElementById(id);
+    
+    // If values are the same, just set it without animation
+    if (start === end) {
+        element.textContent = end;
+        return;
+    }
+    
     const range = end - start;
     const increment = range / (duration / 16);
     let current = start;
