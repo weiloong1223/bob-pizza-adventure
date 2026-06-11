@@ -130,11 +130,6 @@ MIT License - Feel free to use this project for your portfolio!
 - Inspired by the need to showcase AI capabilities
 - Designed for fun and learning
 
-## 📞 Contact & Social
-
-- Share on LinkedIn: [Your LinkedIn Profile]
-- GitHub: [Your GitHub Profile]
-- Portfolio: [Your Website]
 
 ## 🎉 Fun Facts
 
