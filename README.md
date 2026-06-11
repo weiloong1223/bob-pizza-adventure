@@ -54,12 +54,17 @@ Simply open `index.html` in your web browser!
 
 ### Landing Page
 Meet Bob and start your adventure!
+<img width="1201" height="886" alt="image" src="https://github.com/user-attachments/assets/cdcf1a06-0e6e-48ac-9c1d-7ad837a3605a" />
+
 
 ### SDLC Phases
 Interactive journey through all development phases.
+<img width="1263" height="564" alt="image" src="https://github.com/user-attachments/assets/8268cfd3-d450-4d27-8382-a03bc36553ac" />
 
 ### Pizza App
 Fully functional ordering system.
+<img width="1566" height="943" alt="image" src="https://github.com/user-attachments/assets/71c64d6d-eabe-4ca3-a3d5-91e057a066e9" />
+
 
 ## 🎯 Use Cases
 
